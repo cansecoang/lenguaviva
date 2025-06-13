@@ -10,7 +10,6 @@ import {
   Heart, 
   Flame, 
   Star,
-  BookOpen,
   Volume2,
   ChevronRight,
   Lock,
@@ -28,35 +27,148 @@ const mockLessons = [
   { id: 6, title: "Animales", level: 6, completed: false, locked: true, stars: 0 },
 ];
 
-const mockQuestions = [
-  {
-    id: 1,
+// Preguntas específicas por lección
+const lessonQuestions = {
+  1: [ // Saludos Básicos
+    {
+      id: 1,
     type: 'translate',
-    question: '¿Cómo se dice "Hello" en español?',
-    options: ['Hola', 'Adiós', 'Gracias', 'Por favor'],
+    question: '¿Cómo se dice "Hola" en mixe ?',
+    options: ['Min', 'Jëj', 'Pääj', 'Määy'],
     correct: 0,
-    audio: 'Hello'
+    audio: 'Min' // Asumo que ya tienes un audio de "Min"
   },
   {
     id: 2,
     type: 'multiple',
-    question: 'Selecciona la traducción correcta de "Good morning"',
-    options: ['Buenas noches', 'Buenos días', 'Buenas tardes', 'Hasta luego'],
+    question: 'Selecciona la traducción correcta de "Buenos días" en mixe ',
+    options: ['Tëëk', 'Määy', 'Te\'ns pyë', 'Kajpxy'],
     correct: 1,
-    audio: 'Good morning'
+    audio: 'Määy' // Asumo que ya tienes un audio de "Määy"
   },
   {
     id: 3,
     type: 'audio',
-    question: 'Escucha y selecciona la traducción correcta',
-    options: ['¿Cómo estás?', '¿Cómo te llamas?', '¿De dónde eres?', '¿Cuántos años tienes?'],
+    question: 'Escucha y selecciona la traducción correcta de "¿Cómo estás?" en mixe ',
+    options: ['¿Pajën?', '¿Jam jaay?', '¿Jampyëk?', '¿Jaaw pyëk?'],
     correct: 0,
-    audio: '¿Cómo estás?'
+    audio: 'Pajën' // Esto es una aproximación, necesitarías el audio real de "¿Pajën?"
+  },
+  {
+    id: 4,
+    type: 'translate',
+    question: '¿Cómo se dice "Adiós" en mixe?',
+    options: ['Min', 'Naax', 'Tëjk', 'Pa\'y'],
+    correct: 1,
+    audio: 'Naax' // Asumo que ya tienes un audio de "Naax"
+    }
+  ],
+  2: [ // Números 1-10
+    {
+    id: 1,
+    type: 'translate',
+    question: '¿Cuál es el número "cinco" en mixe?',
+    options: ['Tujts', 'Nax', 'Jëëp', 'Pook'],
+    correct: 1, // 'Nax'
+    audio: 'Nax' // Asumo que ya tienes un audio para "Nax"
+  },
+  {
+    id: 2,
+    type: 'multiple',
+    question: 'Selecciona el número correcto en mixe : "Ocho"',
+    options: ['Tsëën', 'Tuk', 'Txan', 'Mëk'],
+    correct: 1, // 'Tuk - Ocho'
+    audio: 'Tuk' // Asumo que ya tienes un audio para "Tuk"
+  },
+  {
+    id: 3,
+    type: 'translate',
+    question: '¿Cómo se escribe "3" en mixe?',
+    options: ['Tëjk', 'Tujts', 'Pook', 'Nax'],
+    correct: 1, // 'Tujts'
+    audio: 'Tujts' // Asumo que ya tienes un audio para "Tujts"
+  },
+  {
+    id: 4,
+    type: 'audio',
+    question: 'Escucha y selecciona el número correcto en mixe ',
+    options: ['Juun', 'Mëk', 'Kuun', 'Tëjk'],
+    correct: 1, // 'Mëk'
+    audio: 'Mëk' // Asumo que ya tienes un audio para "Mëk"
   }
-];
+  ],
+  3: [ // Colores
+    {
+    id: 1,
+    type: 'translate',
+    question: '¿Cómo se dice "Rojo" en mixe?',
+    options: ['Tsaaj', 'Mooy', 'Tsëk', 'Pook'],
+    correct: 2, // 'Tsëk'
+    audio: 'Tsëk' // Asumo que ya tienes un audio para "Tsëk"
+  },
+  {
+    id: 2,
+    type: 'multiple',
+    question: 'Selecciona la traducción de "Azul" en mixe ',
+    options: ['Paat', 'Juuj', 'Nëëj', 'Tujts'],
+    correct: 2, // 'Nëëj'
+    audio: 'Nëëj' // Asumo que ya tienes un audio para "Nëëj"
+  },
+  {
+    id: 3,
+    type: 'translate',
+    question: '¿De qué color es el sol en mixe ? (Amarillo)',
+    options: ['Tsëk', 'Tsajaay', 'Mooy', 'Nëëj'],
+    correct: 1, // 'Tsajaay'
+    audio: 'Tsajaay' // Asumo que ya tienes un audio para "Tsajaay"
+  },
+  {
+    id: 4,
+    type: 'audio',
+    question: 'Escucha y selecciona el color correcto en mixe ',
+    options: ['Mooy', 'Tsëk', 'Pook', 'Juuj'],
+    correct: 0, // 'Mooy'
+    audio: 'Mooy' // Asumo que ya tienes un audio para "Mooy"
+  }
+  ],
+  4: [ // Familia
+    {
+    id: 1,
+    type: 'translate',
+    question: '¿Cómo se dice "Madre" en mixe?',
+    options: ['Tsooj', 'Na', 'Wëën', 'Tëëy'],
+    correct: 1, // 'Na'
+    audio: 'Na' // Asumo que ya tienes un audio para "Na"
+  },
+  {
+    id: 2,
+    type: 'multiple',
+    question: 'Selecciona la traducción de "Hermano" en mixe ',
+    options: ['Wëën', 'Tsëëk', 'Pëjk', 'Tëjk'],
+    correct: 2, // 'Pëjk'
+    audio: 'Pëjk' // Asumo que ya tienes un audio para "Pëjk"
+  },
+  {
+    id: 3,
+    type: 'translate',
+    question: '¿Cómo se dice "Abuelo" en mixe?',
+    options: ['Tsooj', 'Tëëy', 'Wëën', 'Pëjk'],
+    correct: 0, // 'Tsooj'
+    audio: 'Tsooj' // Asumo que ya tienes un audio para "Tsooj"
+  },
+  {
+    id: 4,
+    type: 'audio',
+    question: 'Escucha y selecciona el miembro de la familia en mixe ',
+    options: ['Wëën', 'Na', 'Tëëy', 'Tsooj'],
+    correct: 0, // 'Wëën'
+    audio: 'Wëën' // Asumo que ya tienes un audio para "Wëën"
+  }
+  ]
+};
 
 const mockUser = {
-  name: "Ana García",
+  name: "Emily Tovar",
   level: 15,
   xp: 2450,
   streak: 7,
@@ -74,18 +186,18 @@ const LenguaVivaApp = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
   const [hearts, setHearts] = useState(3);
+  const [currentQuestions, setCurrentQuestions] = useState([]);
 
+  // Componente Header
   const Header = () => (
-    <div className="bg-gradient-to-r from-[#7f2f2f] to-[#528781] text-white p-4 shadow-lg">
+    <div className="bg-gradient-to-r from-[#7f2f2f] to-[#A74C2F] text-white p-4 shadow-lg">
       <div className="flex items-center justify-between max-w-6xl mx-auto">
         <div className="flex items-center space-x-3">
-          <div className="">
-            <img 
-                src="src/components/Imagen_de_WhatsApp_2025-06-11_a_las_08.34.21_147af465-removebg-preview.png" 
-                alt="Descripción de la imagen"
+          <img 
+              src="src/components/Imagen_de_WhatsApp_2025-06-11_a_las_08.34.21_147af465-removebg-preview.png" 
+              alt="Descripción de la imagen"
                 className="w-14 h-14 "
               />
-          </div>
           <h1 className="text-2xl font-bold">Lengua Viva</h1>
         </div>
         
@@ -107,13 +219,14 @@ const LenguaVivaApp = () => {
     </div>
   );
 
+  // Componente Home
   const HomeView = () => (
     <div className="max-w-4xl mx-auto p-6">
-   
+      {/* Panel de usuario */}
       <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#80312D] to-[#aa563cba] rounded-full flex items-center justify-center">
               <User className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -141,17 +254,17 @@ const LenguaVivaApp = () => {
             <div key={lesson.id} className="relative">
               {/* Línea conectora */}
               {index < mockLessons.length - 1 && (
-                <div className="absolute left-8 top-16 w-0.5 h-8 bg-gray-300"></div>
+                <div className="absolute left-8 top-16 w-0.5 h-8"></div>
               )}
               
               <div className={`
-                flex items-center p-4 rounded-xl transition-all duration-300 hover:shadow-md cursor-pointer
-                ${lesson.locked ? 'bg-gray-100 opacity-60' : lesson.completed ? 'bg-green-50 border-2 border-green-200' : 'bg-blue-50 border-2 border-blue-200'}
+                flex items-center p-4 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer
+                ${lesson.locked ? 'bg-gray-100 opacity-60' : lesson.completed ? 'bg-[#965b4927] border-2 border-[#965b4988]' : 'bg-blue-50 border-2 border-blue-200'}
               `} onClick={() => !lesson.locked && startLesson(lesson)}>
                 
                 <div className={`
                   w-16 h-16 rounded-full flex items-center justify-center mr-4
-                  ${lesson.locked ? 'bg-gray-300' : lesson.completed ? 'bg-green-500' : 'bg-blue-500'}
+                  ${lesson.locked ? 'bg-gray-300' : lesson.completed ? 'bg-[#80322E]' : 'bg-blue-500'}
                 `}>
                   {lesson.locked ? (
                     <Lock className="w-8 h-8 text-gray-600" />
@@ -185,7 +298,24 @@ const LenguaVivaApp = () => {
 
   // Componente de Lección
   const LessonView = () => {
-    const question = mockQuestions[currentQuestion];
+    const question = currentQuestions[currentQuestion];
+    
+    if (!question) {
+      return (
+        <div className="max-w-2xl mx-auto p-6 text-center">
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Lección no disponible</h2>
+            <p className="text-gray-600 mb-6">Esta lección aún no tiene preguntas disponibles.</p>
+            <button 
+              onClick={() => setCurrentView('home')}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl"
+            >
+              Volver al inicio
+            </button>
+          </div>
+        </div>
+      );
+    }
     
     return (
       <div className="max-w-2xl mx-auto p-6">
@@ -200,7 +330,7 @@ const LenguaVivaApp = () => {
               }}
               className="text-gray-600 hover:text-gray-800"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6 cursor-pointer transition-all duration-300 hover:ease-in-out hover:scale-115" />
             </button>
             <div className="flex items-center space-x-2">
               <Heart className="w-5 h-5 text-red-500" />
@@ -210,7 +340,7 @@ const LenguaVivaApp = () => {
           <div className="w-full bg-gray-200 rounded-full h-3">
             <div 
               className="bg-green-500 h-3 rounded-full transition-all duration-300" 
-              style={{width: `${((currentQuestion + 1) / mockQuestions.length) * 100}%`}}
+              style={{width: `${((currentQuestion + 1) / currentQuestions.length) * 100}%`}}
             ></div>
           </div>
         </div>
@@ -239,7 +369,7 @@ const LenguaVivaApp = () => {
                 onClick={() => handleAnswerSelect(index)}
                 disabled={showResult}
                 className={`
-                  p-4 rounded-xl border-2 text-left transition-all duration-200
+                  p-4 rounded-xl border-2 text-left cursor-pointer transition-all duration-300 hover:shadow-lg
                   ${selectedAnswer === index 
                     ? showResult 
                       ? isCorrect 
@@ -291,7 +421,7 @@ const LenguaVivaApp = () => {
             onClick={handleNextQuestion}
             className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-xl transition-colors duration-200"
           >
-            {currentQuestion === mockQuestions.length - 1 ? 'Completar Lección' : 'Continuar'}
+            {currentQuestion === currentQuestions.length - 1 ? 'Completar Lección' : 'Continuar'}
           </button>
         )}
       </div>
@@ -300,7 +430,7 @@ const LenguaVivaApp = () => {
 
   // Componente de navegación inferior
   const BottomNav = () => (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 ">
       <div className="flex justify-around max-w-md mx-auto">
         {[
           { icon: Home, label: 'Inicio', view: 'home' },
@@ -311,8 +441,8 @@ const LenguaVivaApp = () => {
           <button
             key={view}
             onClick={() => setCurrentView(view)}
-            className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors duration-200
-              ${currentView === view ? 'text-green-500 bg-green-50' : 'text-gray-600 hover:text-gray-800'}
+            className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors duration-200 cursor-pointer hover:shadow-lg hover:border-1
+              ${currentView === view ? 'text-[#7E302B] bg-[#965b4927]' : 'text-gray-600 hover:text-gray-800'}
             `}
           >
             <Icon className="w-6 h-6 mb-1" />
@@ -355,11 +485,12 @@ const LenguaVivaApp = () => {
     </div>
   );
 
+  // Vista de perfil
   const ProfileView = () => (
     <div className="max-w-2xl mx-auto p-6 pb-20">
       <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
         <div className="text-center">
-          <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-24 h-24 bg-gradient-to-br from-[#80312D] to-[#aa563cba] rounded-full flex items-center justify-center mx-auto mb-4">
             <User className="w-12 h-12 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">{mockUser.name}</h2>
@@ -390,7 +521,14 @@ const LenguaVivaApp = () => {
 
   // Funciones
   const startLesson = (lesson) => {
+    const questions = lessonQuestions[lesson.id];
+    if (!questions) {
+      alert('Esta lección aún no está disponible.');
+      return;
+    }
+    
     setCurrentLesson(lesson);
+    setCurrentQuestions(questions);
     setCurrentView('lesson');
     setCurrentQuestion(0);
     setScore(0);
@@ -402,7 +540,7 @@ const LenguaVivaApp = () => {
     if (showResult) return;
     
     setSelectedAnswer(answerIndex);
-    const correct = answerIndex === mockQuestions[currentQuestion].correct;
+    const correct = answerIndex === currentQuestions[currentQuestion].correct;
     setIsCorrect(correct);
     setShowResult(true);
     
@@ -414,11 +552,12 @@ const LenguaVivaApp = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestion === mockQuestions.length - 1) {
+    if (currentQuestion === currentQuestions.length - 1) {
       // Completar lección
       setCurrentView('home');
       setCurrentLesson(null);
       setCurrentQuestion(0);
+      setCurrentQuestions([]);
     } else {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
@@ -428,7 +567,7 @@ const LenguaVivaApp = () => {
 
   // Render principal
   return (
-    <div className="max-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       <div className="pb-20">
